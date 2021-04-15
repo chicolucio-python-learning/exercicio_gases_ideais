@@ -25,7 +25,6 @@ def plot_params(axis):
     ax.tick_params(axis='both', length=3, which='minor', width=1.0)
     ax.set_axisbelow(True)
 
-
 dados = np.genfromtxt((replace_comma_to_dot(text) for text in open('exercicio_aula_1.csv')),
                       delimiter=';', dtype=(float, float), names=['P_bar', 'd_gL'], skip_header=1)
 
@@ -40,9 +39,10 @@ massa_molar = gas_constant * temperature / (regressao.intercept * ureg('bar / (g
 fig, ax = plt.subplots(figsize=(8, 6), nrows=1, ncols=1, tight_layout=True)
 
 plot_params(ax)
-ax.scatter(valores_densidade, pressao_sobre_densidade)
+ax.plot(valores_densidade, pressao_sobre_densidade, color='red', zorder=-1)
+ax.scatter(valores_densidade, pressao_sobre_densidade, s=60)
 ax.set_xlabel(r'$\rho$ / $g \cdot \ell^{-1}$', fontsize=18)
 ax.set_ylabel(r'$\frac{P}{\rho}$ / $bar \cdot \ell \cdot g^{-1}$', fontsize=18)
 
 plt.show()
-print(massa_molar.to('g/mol'))
+#print(massa_molar.to('g/mol'))
